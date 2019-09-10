@@ -56,3 +56,5 @@ require (
 )
 
 replace golang.org/x/sys => golang.org/x/sys v0.0.0-20190226215855-775f8194d0f9
+
+go 1.13

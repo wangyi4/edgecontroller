@@ -33,6 +33,7 @@ WORKDIR /app
 COPY . ./
 
 # Install production dependencies for app
+RUN yarn config set proxy http://child-prc.intel.com:913
 RUN yarn install --production
 
 # Build production bundle
@@ -51,6 +52,7 @@ COPY --from=react-build /app/build ./build
 COPY ./server ./
 
 # Install production dependencies for server
+RUN yarn config set proxy http://child-prc.intel.com:913
 RUN yarn install --production
 
 EXPOSE 80
