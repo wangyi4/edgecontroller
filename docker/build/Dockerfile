@@ -13,9 +13,14 @@
 # limitations under the License.
 
 # CCE API
-FROM golang:1.12-alpine
+FROM golang:1.13-alpine
 
 ENV GO111MODULE on
+ENV http_proxy "http://child-prc.intel.com:913"
+ENV https_proxy "http://child-prc.intel.com:913"
+ENV ftp_proxy "http://child-prc.intel.com:913"
+ENV no_proxy "127.0.0.1,localhost,.intel.com"
+
 
 WORKDIR /go/src/github.com/open-ness/edgecontroller
 
@@ -28,6 +33,8 @@ ENV github_token=$GITHUB_TOKEN
 RUN if [[ -n "${github_token}" ]]; \
 	then git config --global url.https://${github_token}@github.com/.insteadOf https://github.com/; \
 	fi;
+
+RUN git config --global http.proxy http://child-prc.intel.com:913
 
 RUN cd /go/src/github.com/open-ness/edgecontroller &&\
     go build -o dist/cce ./cmd/cce &&\
