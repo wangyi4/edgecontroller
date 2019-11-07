@@ -1,0 +1,14 @@
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+# Copyright (C) 2019 Intel Corporation
+#
+FROM golang:1.13-alpine
+MAINTAINER Yi Wang "yi.c.wang@intel.com"
+
+ENV GO111MODULE on
+
+COPY dist/cce /cce
+
+WORKDIR /artifacts
+ENTRYPOINT ["/cce"]
